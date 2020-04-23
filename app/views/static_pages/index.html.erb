@@ -1,17 +1,17 @@
 <div class="text-center">
   <div class="container">
     <div class="box col-10 box-color">
-      <% if !current_user %>
-        <h3 class="make-it-green">Sign up or log in to start playing</h3>
-        <br/>
-      <% end %>
       <% if current_user %>
-        <h3><%= link_to "Host match", "#", class: "btn btn-primary make-it-green" %></h3>
+        <%= simple_form_for @game, url: games_path do |f| %>
+          <h3><%= f.submit 'Host match', class: 'btn btn-primary make-it-green' %></h3>
+        <% end %>
         <br/>
         <h3><%= link_to "Find match", "#", class: "btn btn-primary make-it-green" %></h3>
         <br/>
         <h3><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "btn btn-primary make-it-green" %></h3>
         <% else %>
+        <h3 class="make-it-green">Sign up or log in to start playing</h3>
+        <br/>
         <h3><%= link_to "Log in", new_user_session_path, class: "btn btn-primary make-it-green" %></h3>
         <br/>
         <h3><%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary make-it-green" %></h3>

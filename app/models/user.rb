@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :games
   attr_accessor :login
   validates :username, presence: true, length: { minimum: 1 }
   # Include default devise modules. Others available are:

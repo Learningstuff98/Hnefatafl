@@ -1,0 +1,16 @@
+<div class="page-content make-it-green">
+  <h3>
+    <%= "Hosted by #{@game.user.username}" %>
+  </h3>
+
+  <br/>
+
+  <h3>
+    <%= link_to "End match",
+      game_path(@game),
+      method: :delete,
+      data: { confirm: "Are you sure?" },
+      class: "btn btn-primary make-it-green"
+    %>
+  </h3>
+</div>
