@@ -1,45 +1,48 @@
 class Board extends React.Component {
 
-  defineDimensions() {
+  setDimensions() {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   }
 
-  isKingsTile(xCoord, yCoord) {
-    if(xCoord === 1 || xCoord === 11) {
-      if(yCoord === 1 || yCoord === 11) {
-        return true;
-      }
-    } else if(xCoord === 6 && yCoord === 6) {
+  isEscapeTile(xCoord, yCoord) {
+    const coords = [this.setDimensions()[0], this.setDimensions().pop()];
+    if(coords.includes(xCoord) && coords.includes(yCoord)) {
       return true;
     }
     return false;
   }
 
-  findPiece(x, y, pieces) {
-    for(let i = 0; i < pieces.length; i++) {
-      if(pieces[i].x_coord === x && pieces[i].y_coord === y) {
-        return pieces[i];
+  isMiddleTile(x, y) {
+    if(x === this.setDimensions().length / 2 + .5) {
+      if(y === this.setDimensions().length / 2 + .5) {
+        return true
       }
     }
+    return false
+  }
+
+  findPiece(x, y, pieces) {
+    return pieces.find(
+      piece => piece.x_coord === x && piece.y_coord === y
+    );
   }
 
   buildRow(yCoord) {
-    return this.defineDimensions().map((x) => {
-      const kingsTile = this.isKingsTile(x, yCoord);
-      const piece = this.findPiece(x, yCoord, this.props.pieces);
+    return this.setDimensions().map((x) => {
       return <span key={x}>
         <Tile
           xCoord={x}
           yCoord={yCoord}
-          kingsTile={kingsTile}
-          piece={piece}
+          piece={this.findPiece(x, yCoord, this.props.pieces)}
+          escapeTile={this.isEscapeTile(x, yCoord)}
+          middleTile={this.isMiddleTile(x, yCoord)}
         />
       </span>
     });
   }
 
   buildRows() {
-    return this.defineDimensions().reverse().map((y) => {
+    return this.setDimensions().reverse().map((y) => {
       return <div className="board-row" key={y}>
         {this.buildRow(y)}
       </div>
