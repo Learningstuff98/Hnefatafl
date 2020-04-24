@@ -42,3 +42,32 @@ body {
 .page-content {
   margin-left: 20px;
 }
+
+.tile {
+  border: 1px solid rgb(0, 0, 0);
+  float: left;
+  height: 70px;
+  width: 70px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.light {
+  background-color: rgb(133, 49, 0);
+}
+
+.dark {
+  background-color: rgb(59, 59, 59);
+}
+
+.red {
+  background-color: rgb(119, 0, 0);
+}
