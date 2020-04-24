@@ -72,10 +72,19 @@ body {
   background-color: rgb(119, 44, 44);
 }
 
-.make-it-red {
-  color: rgb(163, 0, 0);
+.piece {
+  border: 2px solid rgb(0, 0, 0);
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
-.piece {
-  margin-top: 13px;
+.defender {
+  background-color: rgb(104, 107, 101);
+}
+
+.king {
+  background-color: rgb(71, 98, 175);
 }

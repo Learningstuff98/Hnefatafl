@@ -21,17 +21,17 @@ class Tile extends React.Component {
   }
 
   buildPiece(piece) {
-    if(piece && piece.piece_type === 'attacker') {
-      return <h2>
-        <Piece/>
-      </h2>
+    if(piece) {
+      return <Piece
+        piece={piece}
+      />
     } else {
-      return <span></span>
+      return <div></div>
     }
   }
 
   render() {
-    return <span onClick={() => console.log(this.props.xCoord, this.props.yCoord, this.props.isEscapeTile)}>
+    return <span onClick={() => console.log(this.props.xCoord, this.props.yCoord, this.props.isEscapeTile, this.props.piece)}>
       {this.buildTile(this.props.piece)}
     </span>
   }

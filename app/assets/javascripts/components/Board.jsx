@@ -5,8 +5,8 @@ class Board extends React.Component {
   }
 
   isEscapeTile(xCoord, yCoord) {
-    const coords = [this.setDimensions()[0], this.setDimensions().pop()];
-    if(coords.includes(xCoord) && coords.includes(yCoord)) {
+    const dimensionsMinMax = [1, this.setDimensions().pop()];
+    if(dimensionsMinMax.includes(xCoord) && dimensionsMinMax.includes(yCoord)) {
       return true;
     }
     return false;
