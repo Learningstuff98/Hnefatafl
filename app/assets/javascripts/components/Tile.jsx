@@ -12,14 +12,25 @@ class Tile extends React.Component {
     }
   }
 
-  buildTile() {
+  buildTile(piece) {
     return <span className={"tile " + this.handleColor()}>
+      {this.buildPiece(piece)}
     </span>
+  }
+
+  buildPiece(piece) {
+    if(piece && piece.piece_type === 'attacker') {
+      return <h2 className="make-it-red">
+        {"A"}
+      </h2>
+    } else {
+      return <span></span>
+    }
   }
 
   render() {
     return <span onClick={() => console.log(this.props.xCoord, this.props.yCoord, this.props.kingsTile)}>
-      {this.buildTile()}
+      {this.buildTile(this.props.piece)}
     </span>
   }
 }

@@ -15,14 +15,24 @@ class Board extends React.Component {
     return false;
   }
 
+  findPiece(x, y, pieces) {
+    for(let i = 0; i < pieces.length; i++) {
+      if(pieces[i].x_coord === x && pieces[i].y_coord === y) {
+        return pieces[i];
+      }
+    }
+  }
+
   buildRow(yCoord) {
     return this.defineDimensions().map((x) => {
       const kingsTile = this.isKingsTile(x, yCoord);
+      const piece = this.findPiece(x, yCoord, this.props.pieces);
       return <span key={x}>
         <Tile
           xCoord={x}
           yCoord={yCoord}
           kingsTile={kingsTile}
+          piece={piece}
         />
       </span>
     });
