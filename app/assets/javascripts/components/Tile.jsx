@@ -1,9 +1,9 @@
 class Tile extends React.Component {
 
   handleColor() {
-    if(this.props.escapeTile) {
+    if(this.props.isEscapeTile) {
       return "red";
-    } else if(this.props.middleTile) {
+    } else if(this.props.isMiddleTile) {
       return "red";
     } else if(this.props.xCoord % 2 !== 0 && this.props.yCoord % 2 !== 0) {
       return "light";
@@ -22,8 +22,8 @@ class Tile extends React.Component {
 
   buildPiece(piece) {
     if(piece && piece.piece_type === 'attacker') {
-      return <h2 className="make-it-red">
-        {"A"}
+      return <h2>
+        <Piece/>
       </h2>
     } else {
       return <span></span>
@@ -31,7 +31,7 @@ class Tile extends React.Component {
   }
 
   render() {
-    return <span onClick={() => console.log(this.props.xCoord, this.props.yCoord, this.props.escapeTile)}>
+    return <span onClick={() => console.log(this.props.xCoord, this.props.yCoord, this.props.isEscapeTile)}>
       {this.buildTile(this.props.piece)}
     </span>
   }

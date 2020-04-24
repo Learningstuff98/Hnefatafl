@@ -34,8 +34,8 @@ class Board extends React.Component {
           xCoord={x}
           yCoord={yCoord}
           piece={this.findPiece(x, yCoord, this.props.pieces)}
-          escapeTile={this.isEscapeTile(x, yCoord)}
-          middleTile={this.isMiddleTile(x, yCoord)}
+          isEscapeTile={this.isEscapeTile(x, yCoord)}
+          isMiddleTile={this.isMiddleTile(x, yCoord)}
         />
       </span>
     });
