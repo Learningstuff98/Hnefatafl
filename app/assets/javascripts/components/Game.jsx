@@ -2,8 +2,12 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pieces: []
+      pieces: [],
+      selectedPiece: null
     };
+    this.selectPiece = this.selectPiece.bind(this);
+    this.unselectPiece = this.unselectPiece.bind(this);
+    this.getPieces = this.getPieces.bind(this);
   }
 
   componentDidMount() {
@@ -21,10 +25,28 @@ class Game extends React.Component {
     .catch((err) => console.log(err.response.data));
   }
 
+  selectPiece(piece) {
+    this.setState({
+      selectedPiece: piece
+    });
+  }
+
+  unselectPiece() {
+    this.setState({
+      selectedPiece: null
+    });
+  }
+
   buildBoard() {
     return <div>
       <Board
         pieces={this.state.pieces}
+        selectPiece={this.selectPiece}
+        unselectPiece={this.unselectPiece}
+        selectedPiece={this.state.selectedPiece}
+        setRoot={this.setRoot}
+        game_id={this.props.game_id}
+        getPieces={this.getPieces}
       />
     </div>
   }
@@ -33,5 +55,5 @@ class Game extends React.Component {
     return <div>
       {this.buildBoard()}
     </div>
-  }  
+  }
 }

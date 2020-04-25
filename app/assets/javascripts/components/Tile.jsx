@@ -30,8 +30,31 @@ class Tile extends React.Component {
     }
   }
 
+  handleUpdateResults() {
+    this.props.unselectPiece();
+    this.props.getPieces();
+  }
+
+  updateCoords(selectedPiece, x, y) {
+    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
+      x_coord: x,
+      y_coord: y
+    })
+    .then(() => this.handleUpdateResults())
+    .catch((err) => console.log(err.response.data));
+  }
+
+  handlePieceMovement() {
+    if(!this.props.selectedPiece) {
+      this.props.selectPiece(this.props.piece)
+    }
+    if(this.props.selectedPiece) {
+      this.updateCoords(this.props.selectedPiece, this.props.xCoord, this.props.yCoord);
+    }
+  }
+
   render() {
-    return <span onClick={() => console.log(this.props.xCoord, this.props.yCoord, this.props.isEscapeTile, this.props.piece)}>
+    return <span onClick={() => this.handlePieceMovement(this.props.piece)}>
       {this.buildTile(this.props.piece)}
     </span>
   }

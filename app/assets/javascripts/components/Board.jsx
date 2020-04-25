@@ -36,6 +36,12 @@ class Board extends React.Component {
           piece={this.findPiece(x, yCoord, this.props.pieces)}
           isEscapeTile={this.isEscapeTile(x, yCoord)}
           isMiddleTile={this.isMiddleTile(x, yCoord)}
+          selectPiece={this.props.selectPiece}
+          unselectPiece={this.props.unselectPiece}
+          selectedPiece={this.props.selectedPiece}
+          setRoot={this.props.setRoot}
+          game_id={this.props.game_id}
+          getPieces={this.props.getPieces}
         />
       </span>
     });
