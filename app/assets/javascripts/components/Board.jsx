@@ -15,10 +15,10 @@ class Board extends React.Component {
   isMiddleTile(x, y) {
     if(x === this.setDimensions().length / 2 + .5) {
       if(y === this.setDimensions().length / 2 + .5) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
 
   findPiece(x, y, pieces) {
