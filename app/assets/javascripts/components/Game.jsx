@@ -12,6 +12,19 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.getPieces();
+    this.handleWebsocketUpdates(this);
+  }
+
+  handleWebsocketUpdates(gameComponent) {
+    App.games = App.cable.subscriptions.create('GamesChannel', {
+      received(data) {
+        if(data.game_id === gameComponent.props.game_id) {
+          if(data.update_is_needed === 'for_pieces') {
+            gameComponent.getPieces();
+          }
+        }
+      }
+    });
   }
 
   setRoot() {

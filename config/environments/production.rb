@@ -1,5 +1,7 @@
 Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'hnefatafl-andy-strube.herokuapp.com', port: 3000 }
+  config.web_socket_server_url = "wss://viking-chess-andy-strube.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ['https://viking-chess-andy-strube.herokuapp.com', 'http://viking-chess-andy-strube.herokuapp.com']
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

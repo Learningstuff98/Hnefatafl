@@ -11,6 +11,10 @@ class PiecesController < ApplicationController
     game = Game.find(params[:game_id])
     piece = Piece.find(params[:id])
     piece.update_attributes(piece_params)
+    ActionCable.server.broadcast 'games',
+      update_is_needed: "for_pieces",
+      game_id: game.id
+    head :ok
   end
 
   private

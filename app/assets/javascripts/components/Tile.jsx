@@ -32,7 +32,7 @@ class Tile extends React.Component {
 
   handleUpdateResults() {
     this.props.unselectPiece();
-    this.props.getPieces();
+    //this.props.getPieces();
   }
 
   updateCoords(selectedPiece, x, y) {
