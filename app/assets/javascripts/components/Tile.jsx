@@ -30,17 +30,12 @@ class Tile extends React.Component {
     }
   }
 
-  handleUpdateResults() {
-    this.props.unselectPiece();
-    //this.props.getPieces();
-  }
-
   updateCoords(selectedPiece, x, y) {
     axios.patch(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
       x_coord: x,
       y_coord: y
     })
-    .then(() => this.handleUpdateResults())
+    .then(() => this.props.unselectPiece())
     .catch((err) => console.log(err.response.data));
   }
 
