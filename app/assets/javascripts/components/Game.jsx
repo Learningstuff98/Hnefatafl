@@ -39,15 +39,11 @@ class Game extends React.Component {
   }
 
   selectPiece(piece) {
-    this.setState({
-      selectedPiece: piece
-    });
+    this.setState({ selectedPiece: piece });
   }
 
   unselectPiece() {
-    this.setState({
-      selectedPiece: null
-    });
+    this.setState({ selectedPiece: null });
   }
 
   buildBoard() {

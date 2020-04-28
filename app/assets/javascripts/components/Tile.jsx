@@ -1,6 +1,6 @@
 class Tile extends React.Component {
 
-  handleColor() {
+  setColor() {
     if(this.props.isEscapeTile) {
       return "red";
     } else if(this.props.isMiddleTile) {
@@ -14,8 +14,16 @@ class Tile extends React.Component {
     }
   }
 
+  setSelectedColor() {
+    if(this.props.selectedPiece && this.props.piece) {
+      if(this.props.selectedPiece.id === this.props.piece.id) {
+        return "selected";
+      }
+    }
+  }
+
   buildTile(piece) {
-    return <span className={"tile " + this.handleColor()}>
+    return <span className={"tile " + this.setColor() + " " + this.setSelectedColor()}>
       {this.buildPiece(piece)}
     </span>
   }
