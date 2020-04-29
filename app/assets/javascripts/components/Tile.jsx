@@ -38,31 +38,71 @@ class Tile extends React.Component {
     }
   }
 
-  isValidVerticleMove() {
-    if(this.props.selectedPiece.x_coord === this.props.xCoord) {
-      if(this.props.selectedPiece.y_coord < this.props.yCoord) {
-        return true;
-      }
-      if(this.props.selectedPiece.y_coord > this.props.yCoord) {
-        return true;
+  getVerticalPathCoords(startingPoint, endingPoint) {
+    let coords = [];
+    for(let y = startingPoint + 1; y < endingPoint; y++) {
+      coords.push([this.props.xCoord, y]);
+    }
+    return coords;
+  }
+
+  isVerticalPathClear(startingPoint, endingPoint) {
+    const coords = this.getVerticalPathCoords(startingPoint, endingPoint);
+    for(piece of this.props.pieces) {
+      for(coordPair of coords) {
+        if(piece.x_coord === coordPair[0] && piece.y_coord === coordPair[1]) {
+          return false;
+        }
       }
     }
+    return true;
+  }
+
+  isValidVerticalMove() {
+    if(this.props.selectedPiece.x_coord === this.props.xCoord) {
+      if(this.props.selectedPiece.y_coord < this.props.yCoord) {
+        return this.isVerticalPathClear(this.props.selectedPiece.y_coord, this.props.yCoord)
+      }
+      if(this.props.selectedPiece.y_coord > this.props.yCoord) {
+        return this.isVerticalPathClear(this.props.yCoord, this.props.selectedPiece.y_coord)
+      }
+    }
+  }
+
+  getHorizontalPathCoords(startingPoint, endingPoint) {
+    let coords = [];
+    for(let x = startingPoint + 1; x < endingPoint; x++) {
+      coords.push([x, this.props.yCoord]);
+    }
+    return coords;
+  }
+
+  isHorizontalPathClear(startingPoint, endingPoint) {
+    const coords = this.getHorizontalPathCoords(startingPoint, endingPoint);
+    for(piece of this.props.pieces) {
+      for(coordPair of coords) {
+        if(piece.x_coord === coordPair[0] && piece.y_coord === coordPair[1]) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   isValidHorizontalMove() {
     if(this.props.selectedPiece.y_coord === this.props.yCoord) {
       if(this.props.selectedPiece.x_coord < this.props.xCoord) {
-        return true;
+        return this.isHorizontalPathClear(this.props.selectedPiece.x_coord, this.props.xCoord);
       }
       if(this.props.selectedPiece.x_coord > this.props.xCoord) {
-        return true;
+        return this.isHorizontalPathClear(this.props.xCoord, this.props.selectedPiece.x_coord);
       }
     }
   }
 
   isValidMove() {
     if(this.props.selectedPiece) {
-      if(this.isValidVerticleMove()) {
+      if(this.isValidVerticalMove()) {
         return true;
       }
       if(this.isValidHorizontalMove()) {
