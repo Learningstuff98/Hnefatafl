@@ -38,13 +38,50 @@ class Tile extends React.Component {
     }
   }
 
+  isValidVerticleMove() {
+    if(this.props.selectedPiece.x_coord === this.props.xCoord) {
+      if(this.props.selectedPiece.y_coord < this.props.yCoord) {
+        return true;
+      }
+      if(this.props.selectedPiece.y_coord > this.props.yCoord) {
+        return true;
+      }
+    }
+  }
+
+  isValidHorizontalMove() {
+    if(this.props.selectedPiece.y_coord === this.props.yCoord) {
+      if(this.props.selectedPiece.x_coord < this.props.xCoord) {
+        return true;
+      }
+      if(this.props.selectedPiece.x_coord > this.props.xCoord) {
+        return true;
+      }
+    }
+  }
+
+  isValidMove() {
+    if(this.props.selectedPiece) {
+      if(this.isValidVerticleMove()) {
+        return true;
+      }
+      if(this.isValidHorizontalMove()) {
+        return true;
+      }
+    }
+  }
+
   updateCoords(selectedPiece, x, y) {
-    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
-      x_coord: x,
-      y_coord: y
-    })
-    .then(() => this.props.unselectPiece())
-    .catch((err) => console.log(err.response.data));
+    if(this.isValidMove() && !this.props.piece) {
+      axios.patch(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
+        x_coord: x,
+        y_coord: y
+      })
+      .then(() => this.props.unselectPiece())
+      .catch((err) => console.log(err.response.data));
+    } else {
+      this.props.unselectPiece();
+    }
   }
 
   handlePieceMovement() {

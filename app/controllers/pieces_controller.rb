@@ -10,14 +10,9 @@ class PiecesController < ApplicationController
   def update
     game = Game.find(params[:game_id])
     piece = Piece.find(params[:id])
-    origional_coords = [piece.x_coord, piece.y_coord]
     piece.update_attributes(piece_params)
-    if piece.valid_move?(origional_coords)
-      piece.broadcast_update_signal
-      head :ok
-    else
-      piece.restore_coords(origional_coords)
-    end
+    piece.broadcast_update_signal
+    head :ok
   end
 
   private
