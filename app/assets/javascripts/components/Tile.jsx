@@ -103,16 +103,50 @@ class Tile extends React.Component {
   isValidMove() {
     if(this.props.selectedPiece) {
       if(this.isValidVerticalMove()) {
-        return true;
+        if(this.isValidTile()) {
+          return true
+        }
       }
       if(this.isValidHorizontalMove()) {
-        return true;
+        if(this.isValidTile()) {
+          return true;
+        }
       }
     }
   }
 
+  deletePiece() {
+    axios.delete(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + this.props.piece.id)
+    .catch((err) => console.log(err.response.data));
+  }
+
+  isValidTile() {
+    if(this.props.piece) {
+      if(this.props.piece.piece_type === 'defender') {
+        if(this.props.selectedPiece.piece_type === 'attacker') {
+          this.deletePiece();
+          return true;
+        }
+      }
+      if(this.props.piece.piece_type === 'attacker') {
+        if(this.props.selectedPiece.piece_type === 'defender') {
+          this.deletePiece();
+          return true;
+        }
+      }
+      if(this.props.piece.piece_type === 'attacker') {
+        if(this.props.selectedPiece.piece_type === 'king') {
+          this.deletePiece();
+          return true;
+        }
+      }
+    } else {
+      return true;
+    }
+  }
+
   updateCoords(selectedPiece, x, y) {
-    if(this.isValidMove() && !this.props.piece) {
+    if(this.isValidMove()) {
       axios.patch(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
         x_coord: x,
         y_coord: y
