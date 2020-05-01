@@ -43,6 +43,8 @@ class Board extends React.Component {
           game_id={this.props.game_id}
           getPieces={this.props.getPieces}
           pieces={this.props.pieces}
+          kingsHealth={this.props.kingsHealth}
+          getGameInfo={this.props.getGameInfo}
         />
       </span>
     });

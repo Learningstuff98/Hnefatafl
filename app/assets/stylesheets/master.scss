@@ -92,3 +92,15 @@ body {
 .selected {
   background-color: rgb(37, 52, 100);
 }
+
+.good {
+  border: 4px solid rgb(154, 189, 0);
+}
+
+.fair {
+  border: 4px solid rgb(0, 2, 119);
+}
+
+.poor {
+  border: 4px solid rgb(0, 65, 19);
+}

@@ -11,7 +11,7 @@ class Piece extends React.Component {
   }
 
   setKingPiece() {
-    return <div className="king piece">
+    return <div className={"king piece " + this.props.kingsHealth}>
     </div>
   }
 

@@ -3,15 +3,18 @@ class Game extends React.Component {
     super(props);
     this.state = {
       pieces: [],
-      selectedPiece: null
+      selectedPiece: null,
+      kingsHealth: null
     };
     this.selectPiece = this.selectPiece.bind(this);
     this.unselectPiece = this.unselectPiece.bind(this);
     this.getPieces = this.getPieces.bind(this);
+    this.getGameInfo = this.getGameInfo.bind(this);
   }
 
   componentDidMount() {
     this.getPieces();
+    this.getGameInfo();
     this.handleWebsocketUpdates(this);
   }
 
@@ -22,9 +25,18 @@ class Game extends React.Component {
           if(data.update_is_needed === 'for_pieces') {
             gameComponent.getPieces();
           }
+          if(data.update_is_needed === 'for_game_info') {
+            gameComponent.getGameInfo();
+          }
         }
       }
     });
+  }
+
+  getGameInfo() {
+    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit')
+    .then((res) => this.setState({ kingsHealth: res.data.kingshealth }))
+    .catch((err) => console.log(err.response.data));
   }
 
   setRoot() {
@@ -56,6 +68,8 @@ class Game extends React.Component {
         setRoot={this.setRoot}
         game_id={this.props.game_id}
         getPieces={this.getPieces}
+        kingsHealth={this.state.kingsHealth}
+        getGameInfo={this.getGameInfo}
       />
     </div>
   }

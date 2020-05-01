@@ -32,6 +32,7 @@ class Tile extends React.Component {
     if(piece) {
       return <Piece
         piece={piece}
+        kingsHealth={this.props.kingsHealth}
       />
     } else {
       return <div></div>
@@ -115,8 +116,8 @@ class Tile extends React.Component {
     }
   }
 
-  deletePiece() {
-    axios.delete(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + this.props.piece.id)
+  deletePiece(pieceId) {
+    axios.delete(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + pieceId)
     .catch((err) => console.log(err.response.data));
   }
 
@@ -124,25 +125,53 @@ class Tile extends React.Component {
     if(this.props.piece) {
       if(this.props.piece.piece_type === 'defender') {
         if(this.props.selectedPiece.piece_type === 'attacker') {
-          this.deletePiece();
+          this.deletePiece(this.props.piece.id);
           return true;
         }
       }
       if(this.props.piece.piece_type === 'attacker') {
         if(this.props.selectedPiece.piece_type === 'defender') {
-          this.deletePiece();
+          this.deletePiece(this.props.piece.id);
           return true;
         }
       }
       if(this.props.piece.piece_type === 'attacker') {
         if(this.props.selectedPiece.piece_type === 'king') {
-          this.deletePiece();
+          this.deletePiece(this.props.piece.id);
           return true;
+        }
+      }
+      if(this.props.piece.piece_type === 'king') {
+        if(this.props.selectedPiece.piece_type === 'attacker') {
+          if(this.props.kingsHealth !== "poor") {
+            this.deletePiece(this.props.selectedPiece.id);
+            this.updateKingsHealth();
+            return true;
+          } else {
+            this.deletePiece(this.props.piece.id);
+            return true;
+          }
         }
       }
     } else {
       return true;
     }
+  }
+
+  setKingsHealthStatus() {
+    if(this.props.kingsHealth === "good") {
+      return "fair";
+    }
+    if(this.props.kingsHealth === "fair") {
+      return "poor";
+    }
+  }
+
+  updateKingsHealth() {
+    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
+      kingshealth: this.setKingsHealthStatus()
+    })
+    .catch((err) => console.log(err.response.data));
   }
 
   updateCoords(selectedPiece, x, y) {
