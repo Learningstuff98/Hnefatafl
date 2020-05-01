@@ -9,10 +9,12 @@ class PiecesController < ApplicationController
 
   def update
     game = Game.find(params[:game_id])
-    piece = Piece.find(params[:id])
-    piece.update_attributes(piece_params)
-    piece.broadcast_update_signal
-    head :ok
+    if Piece.find_by_id(params[:id])
+      piece = Piece.find(params[:id])
+      piece.update_attributes(piece_params)
+      piece.broadcast_update_signal
+      head :ok
+    end
   end
 
   def destroy
