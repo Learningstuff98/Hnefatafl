@@ -43,6 +43,10 @@ class Game < ApplicationRecord
     self.pieces.create(piece_type: "defender", x_coord: 6, y_coord: 4)
     self.pieces.create(piece_type: "defender", x_coord: 8, y_coord: 6)
     self.pieces.create(piece_type: "defender", x_coord: 6, y_coord: 8)
+    self.pieces.create(piece_type: "defender", x_coord: 4, y_coord: 5)
+    self.pieces.create(piece_type: "defender", x_coord: 4, y_coord: 7)
+    self.pieces.create(piece_type: "defender", x_coord: 8, y_coord: 7)
+    self.pieces.create(piece_type: "defender", x_coord: 8, y_coord: 5)
 
     self.pieces.create(piece_type: "king", x_coord: 6, y_coord: 6)
   end

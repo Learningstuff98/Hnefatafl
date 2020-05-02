@@ -105,7 +105,7 @@ class Tile extends React.Component {
     if(this.props.selectedPiece) {
       if(this.isValidVerticalMove()) {
         if(this.isValidTile()) {
-          return true
+          return true;
         }
       }
       if(this.isValidHorizontalMove()) {
@@ -143,12 +143,13 @@ class Tile extends React.Component {
       }
       if(this.props.piece.piece_type === 'king') {
         if(this.props.selectedPiece.piece_type === 'attacker') {
-          if(this.props.kingsHealth !== "poor") {
+          if(this.props.kingsHealth === "good") {
             this.deletePiece(this.props.selectedPiece.id);
             this.updateKingsHealth();
             return true;
           } else {
             this.deletePiece(this.props.piece.id);
+            this.updateKingsHealth();
             return true;
           }
         }
@@ -160,10 +161,10 @@ class Tile extends React.Component {
 
   setKingsHealthStatus() {
     if(this.props.kingsHealth === "good") {
-      return "fair";
-    }
-    if(this.props.kingsHealth === "fair") {
       return "poor";
+    }
+    if(this.props.kingsHealth === "poor") {
+      return "dead";
     }
   }
 
