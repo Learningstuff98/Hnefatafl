@@ -50,7 +50,9 @@ class Game extends React.Component {
   }
 
   selectPiece(piece) {
-    this.setState({ selectedPiece: piece });
+    if(this.state.kingsHealth !== 'escaped' && this.state.kingsHealth !== 'dead') {
+      this.setState({ selectedPiece: piece });
+    }
   }
 
   unselectPiece() {

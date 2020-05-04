@@ -174,11 +174,19 @@ class Tile extends React.Component {
   isValidPieceTypeForEscapeTile() {
     if(this.props.isEscapeTile) {
       if(this.props.selectedPiece.piece_type === 'king') {
+        this.setDefenderAsWinner();
         return true;
       }
     } else {
       return true;
     }
+  }
+
+  setDefenderAsWinner() {
+    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
+      kingshealth: "escaped"
+    })
+    .catch((err) => console.log(err.response.data));
   }
 
   updateCoords(selectedPiece, x, y) {
