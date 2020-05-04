@@ -39,16 +39,20 @@ class Tile extends React.Component {
     }
   }
 
-  getVerticalPathCoords(startingPoint, endingPoint) {
+  getPathCoords(startingPoint, endingPoint, direction) {
     let coords = [];
-    for(let y = startingPoint + 1; y < endingPoint; y++) {
-      coords.push([this.props.xCoord, y]);
+    for(let xOrY = startingPoint + 1; xOrY < endingPoint; xOrY++) {
+      if(direction === 'vertical') {
+        coords.push([this.props.xCoord, xOrY]);
+      } else {
+        coords.push([xOrY, this.props.yCoord]);
+      }
     }
     return coords;
   }
 
   isVerticalPathClear(startingPoint, endingPoint) {
-    const coords = this.getVerticalPathCoords(startingPoint, endingPoint);
+    const coords = this.getPathCoords(startingPoint, endingPoint, 'vertical');
     for(piece of this.props.pieces) {
       for(coordPair of coords) {
         if(piece.x_coord === coordPair[0] && piece.y_coord === coordPair[1]) {
@@ -70,16 +74,8 @@ class Tile extends React.Component {
     }
   }
 
-  getHorizontalPathCoords(startingPoint, endingPoint) {
-    let coords = [];
-    for(let x = startingPoint + 1; x < endingPoint; x++) {
-      coords.push([x, this.props.yCoord]);
-    }
-    return coords;
-  }
-
   isHorizontalPathClear(startingPoint, endingPoint) {
-    const coords = this.getHorizontalPathCoords(startingPoint, endingPoint);
+    const coords = this.getPathCoords(startingPoint, endingPoint, 'horizontal');
     for(piece of this.props.pieces) {
       for(coordPair of coords) {
         if(piece.x_coord === coordPair[0] && piece.y_coord === coordPair[1]) {
