@@ -171,8 +171,18 @@ class Tile extends React.Component {
     .catch((err) => console.log(err.response.data));
   }
 
+  isValidPieceTypeForEscapeTile() {
+    if(this.props.isEscapeTile) {
+      if(this.props.selectedPiece.piece_type === 'king') {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
   updateCoords(selectedPiece, x, y) {
-    if(this.isValidMove()) {
+    if(this.isValidMove() && this.isValidPieceTypeForEscapeTile()) {
       axios.patch(this.props.setRoot() + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
         x_coord: x,
         y_coord: y
