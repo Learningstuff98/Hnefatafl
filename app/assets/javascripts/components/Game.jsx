@@ -75,8 +75,17 @@ class Game extends React.Component {
     </div>
   }
 
+  renderVictoryStatement(kingsHealth) {
+    return <div>
+      <VictoryStatement
+        kingsHealth={kingsHealth}
+      />
+    </div>
+  }
+
   render() {
     return <div>
+      {this.renderVictoryStatement(this.state.kingsHealth)}
       {this.buildBoard()}
     </div>
   }
