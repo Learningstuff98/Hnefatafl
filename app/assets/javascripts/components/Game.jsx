@@ -56,9 +56,26 @@ class Game extends React.Component {
     .catch((err) => console.log(err.response.data));
   }
 
+  handleSelectionForAttackingPieces(piece) {
+    if(this.state.attacker === this.props.current_user.username) {
+      if(piece.piece_type === 'attacker') {
+        this.setState({ selectedPiece: piece });
+      }
+    }
+  }
+
+  handleSelectionForDefendingPieces(piece) {
+    if(this.state.defender === this.props.current_user.username) {
+      if(piece.piece_type === 'defender' || piece.piece_type === 'king') {
+        this.setState({ selectedPiece: piece });
+      }
+    }
+  }
+
   selectPiece(piece) {
     if(this.state.kingsHealth !== 'escaped' && this.state.kingsHealth !== 'dead') {
-      this.setState({ selectedPiece: piece });
+      this.handleSelectionForAttackingPieces(piece);
+      this.handleSelectionForDefendingPieces(piece);
     }
   }
 
