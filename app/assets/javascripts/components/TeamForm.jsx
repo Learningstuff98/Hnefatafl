@@ -1,5 +1,9 @@
 class TeamForm extends React.Component {
 
+  componentDidMount() {
+    this.props.getGameInfo();
+  }
+
   setUserAsAttacker() {
     axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
       attacker: this.props.current_user.username

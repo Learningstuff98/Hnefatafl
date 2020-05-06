@@ -11,6 +11,7 @@ class Game extends React.Component {
     this.selectPiece = this.selectPiece.bind(this);
     this.unselectPiece = this.unselectPiece.bind(this);
     this.getPieces = this.getPieces.bind(this);
+    this.getGameInfo = this.getGameInfo.bind(this);
   }
 
   componentDidMount() {
@@ -98,6 +99,7 @@ class Game extends React.Component {
         closeTeamForm={this.closeTeamForm}
         attacker={attacker}
         defender={defender}
+        getGameInfo={this.getGameInfo}
       />
     </div>
   }
