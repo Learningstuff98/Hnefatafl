@@ -34,7 +34,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:kingshealth)
+    params.require(:game).permit(:kingshealth, :attacker, :defender)
   end
 
 end

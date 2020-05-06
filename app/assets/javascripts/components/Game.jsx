@@ -4,7 +4,9 @@ class Game extends React.Component {
     this.state = {
       pieces: [],
       selectedPiece: null,
-      kingsHealth: null
+      kingsHealth: null,
+      attacker: "",
+      defender: ""
     };
     this.selectPiece = this.selectPiece.bind(this);
     this.unselectPiece = this.unselectPiece.bind(this);
@@ -34,7 +36,11 @@ class Game extends React.Component {
 
   getGameInfo() {
     axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit')
-    .then((res) => this.setState({ kingsHealth: res.data.kingshealth }))
+    .then((res) => this.setState({ 
+      kingsHealth: res.data.kingshealth,
+      attacker: res.data.attacker,
+      defender: res.data.defender
+    }))
     .catch((err) => console.log(err.response.data));
   }
 
@@ -83,8 +89,32 @@ class Game extends React.Component {
     </div>
   }
 
+  renderTeamForm(attacker, defender) {
+    return <div>
+      <TeamForm
+        current_user={this.props.current_user}
+        setRoot={this.setRoot}
+        game_id={this.props.game_id}
+        closeTeamForm={this.closeTeamForm}
+        attacker={attacker}
+        defender={defender}
+      />
+    </div>
+  }
+
+  renderWhoVsWho(attacker, defender) {
+    return <div>
+      <WhoVsWho
+        attacker={attacker}
+        defender={defender}
+      />
+    </div>
+  }
+
   render() {
     return <div>
+      {this.renderTeamForm(this.state.attacker, this.state.defender)}
+      {this.renderWhoVsWho(this.state.attacker, this.state.defender)}
       {this.renderVictoryStatement(this.state.kingsHealth)}
       {this.buildBoard()}
     </div>

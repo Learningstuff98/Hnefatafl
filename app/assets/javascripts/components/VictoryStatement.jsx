@@ -25,7 +25,7 @@ class VictoryStatement extends React.Component {
 
   render() {
     if(this.props.kingsHealth === 'dead' || this.props.kingsHealth === 'escaped') {
-      return <h2 className="victorystatement box make-it-green">
+      return <h2 className="box-background box make-it-green">
         {this.renderMessage(this.props.kingsHealth)}
       </h2>
     } else {
