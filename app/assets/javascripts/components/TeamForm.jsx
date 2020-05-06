@@ -25,31 +25,35 @@ class TeamForm extends React.Component {
     </h2>
   }
 
-  handleSettingNewUserAsDefender() {
-    if(this.props.attacker !== this.props.current_user.username) {
+  handleSettingNewUserAsDefender(attacker, username) {
+    if(attacker !== username) {
       this.setUserAsDefender();
     }
   }
 
-  handleSettingNewUserAsAttacker() {
-    if(this.props.defender !== this.props.current_user.username) {
+  handleSettingNewUserAsAttacker(defender, username) {
+    if(defender !== username) {
       this.setUserAsAttacker();
     }
   }
 
-  handleAssignments() {
-    if(!this.props.attacker && !this.props.defender) {
+  handleAssignments(attacker, defender, username) {
+    if(!attacker && !defender) {
       return this.setOptions();
-    } else if(this.props.attacker && !this.props.defender) {
-      this.handleSettingNewUserAsDefender();
-    } else if(!this.props.attacker && this.props.defender) {
-      this.handleSettingNewUserAsAttacker();
+    } else if(attacker && !defender) {
+      this.handleSettingNewUserAsDefender(attacker, username);
+    } else if(!attacker && defender) {
+      this.handleSettingNewUserAsAttacker(defender, username);
     }
   }
 
   render() {
     return <div>
-      {this.handleAssignments()}
+      {this.handleAssignments(
+        this.props.attacker,
+        this.props.defender,
+        this.props.current_user.username
+      )}
     </div>
   }
 }
