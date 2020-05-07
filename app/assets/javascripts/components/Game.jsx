@@ -7,7 +7,7 @@ class Game extends React.Component {
       kingsHealth: null,
       attacker: "",
       defender: "",
-      attackersTurn: true
+      attackersTurn: null
     };
     this.selectPiece = this.selectPiece.bind(this);
     this.unselectPiece = this.unselectPiece.bind(this);
@@ -18,6 +18,7 @@ class Game extends React.Component {
   componentDidMount() {
     this.getPieces();
     this.getGameInfo();
+    this.getTurnStatus();
     this.handleWebsocketUpdates(this);
   }
 
@@ -29,7 +30,7 @@ class Game extends React.Component {
             gameComponent.getPieces();
           }
           if(data.update_is_needed === 'for_turn') {
-            gameComponent.invertTurn();
+            gameComponent.getTurnStatus();
           }
           if(data.update_is_needed === 'for_game_info') {
             gameComponent.getGameInfo();
@@ -39,10 +40,12 @@ class Game extends React.Component {
     });
   }
 
-  invertTurn() {
-    this.setState({
-      attackersTurn: !this.state.attackersTurn
-    });
+  getTurnStatus() {
+    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit')
+    .then((res) => this.setState({ 
+      attackersTurn: res.data.attackers_turn
+    }))
+    .catch((err) => console.log(err.response.data));
   }
 
   getGameInfo() {

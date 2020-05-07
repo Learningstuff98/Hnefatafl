@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_222138) do
+ActiveRecord::Schema.define(version: 2020_05_07_222101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_222138) do
     t.string "kingshealth", default: "good"
     t.string "attacker", default: ""
     t.string "defender", default: ""
+    t.boolean "attackers_turn", default: true
   end
 
   create_table "pieces", force: :cascade do |t|
