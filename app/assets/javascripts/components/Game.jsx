@@ -6,7 +6,8 @@ class Game extends React.Component {
       selectedPiece: null,
       kingsHealth: null,
       attacker: "",
-      defender: ""
+      defender: "",
+      attackersTurn: true
     };
     this.selectPiece = this.selectPiece.bind(this);
     this.unselectPiece = this.unselectPiece.bind(this);
@@ -27,11 +28,20 @@ class Game extends React.Component {
           if(data.update_is_needed === 'for_pieces') {
             gameComponent.getPieces();
           }
+          if(data.update_is_needed === 'for_turn') {
+            gameComponent.invertTurn();
+          }
           if(data.update_is_needed === 'for_game_info') {
             gameComponent.getGameInfo();
           }
         }
       }
+    });
+  }
+
+  invertTurn() {
+    this.setState({
+      attackersTurn: !this.state.attackersTurn
     });
   }
 
@@ -59,7 +69,9 @@ class Game extends React.Component {
   handleSelectionForAttackingPieces(piece) {
     if(this.state.attacker === this.props.current_user.username) {
       if(piece.piece_type === 'attacker') {
-        this.setState({ selectedPiece: piece });
+        if(this.state.attackersTurn) {
+          this.setState({ selectedPiece: piece });
+        }
       }
     }
   }
@@ -67,7 +79,9 @@ class Game extends React.Component {
   handleSelectionForDefendingPieces(piece) {
     if(this.state.defender === this.props.current_user.username) {
       if(piece.piece_type === 'defender' || piece.piece_type === 'king') {
-        this.setState({ selectedPiece: piece });
+        if(!this.state.attackersTurn) {
+          this.setState({ selectedPiece: piece });
+        }
       }
     }
   }
@@ -130,10 +144,19 @@ class Game extends React.Component {
     </div>
   }
 
+  renderCurrentTurn(attackersTurn) {
+    return <div>
+      <CurrentTurn
+        attackersTurn={attackersTurn}
+      />
+    </div>
+  }
+
   render() {
     return <div>
       {this.renderTeamForm(this.state.attacker, this.state.defender)}
       {this.renderWhoVsWho(this.state.attacker, this.state.defender)}
+      {this.renderCurrentTurn(this.state.attackersTurn)}
       {this.renderVictoryStatement(this.state.kingsHealth)}
       {this.buildBoard()}
     </div>

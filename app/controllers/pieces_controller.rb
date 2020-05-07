@@ -12,7 +12,8 @@ class PiecesController < ApplicationController
     if Piece.find_by_id(params[:id])
       piece = Piece.find(params[:id])
       piece.update_attributes(piece_params)
-      piece.broadcast_update_signal
+      piece.broadcast_update_signal("for_pieces")
+      piece.broadcast_update_signal("for_turn")
       head :ok
     end
   end
@@ -21,7 +22,7 @@ class PiecesController < ApplicationController
     game = Game.find(params[:game_id])
     piece = Piece.find(params[:id])
     piece.destroy
-    piece.broadcast_update_signal
+    piece.broadcast_update_signal("for_pieces")
     head :ok
   end
 
