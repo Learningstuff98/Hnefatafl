@@ -142,6 +142,7 @@ class Tile extends React.Component {
           if(this.props.kingsHealth === "good") {
             this.deletePiece(this.props.selectedPiece.id);
             this.updateKingsHealth();
+            this.setTurnToDefenders();
             return true;
           } else {
             this.deletePiece(this.props.piece.id);
@@ -153,6 +154,13 @@ class Tile extends React.Component {
     } else {
       return true;
     }
+  }
+
+  setTurnToDefenders() {
+    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
+      attackers_turn: false
+    })
+    .catch((err) => console.log(err.response.data));
   }
 
   setKingsHealthStatus() {
@@ -195,23 +203,11 @@ class Tile extends React.Component {
         x_coord: x,
         y_coord: y
       })
-      .then(() => this.handleUpdateCoordsResults())
+      .then(() => this.props.unselectPiece())
       .catch((err) => console.log(err.response.data));
     } else {
       this.props.unselectPiece();
     }
-  }
-
-  handleUpdateCoordsResults() {
-    this.invertTurnStatus();
-    this.props.unselectPiece();
-  }
-
-  invertTurnStatus() {
-    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
-      attackers_turn: !this.props.attackersTurn
-    })
-    .catch((err) => console.log(err.response.data));
   }
 
   handlePieceMovement() {

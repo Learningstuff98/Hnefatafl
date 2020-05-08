@@ -13,6 +13,8 @@ class PiecesController < ApplicationController
       piece = Piece.find(params[:id])
       piece.update_attributes(piece_params)
       piece.broadcast_update_signal("for_pieces")
+      game.update_attribute(:attackers_turn, !game.attackers_turn)
+      piece.broadcast_update_signal("for_turn")
       head :ok
     end
   end
