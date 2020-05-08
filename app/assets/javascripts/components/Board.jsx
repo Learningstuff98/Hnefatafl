@@ -45,6 +45,7 @@ class Board extends React.Component {
           pieces={this.props.pieces}
           kingsHealth={this.props.kingsHealth}
           getGameInfo={this.props.getGameInfo}
+          attackersTurn={this.props.attackersTurn}
         />
       </span>
     });

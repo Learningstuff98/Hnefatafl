@@ -28,13 +28,14 @@ class GamesController < ApplicationController
     game = Game.find(params[:id])
     game.update_attributes(game_params)
     game.broadcast_update_signal("for_game_info")
+    game.broadcast_update_signal("for_turn")
     head :ok
   end
 
   private
 
   def game_params
-    params.require(:game).permit(:kingshealth, :attacker, :defender)
+    params.require(:game).permit(:kingshealth, :attacker, :defender, :attackers_turn)
   end
 
 end

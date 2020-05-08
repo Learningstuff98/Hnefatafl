@@ -195,11 +195,23 @@ class Tile extends React.Component {
         x_coord: x,
         y_coord: y
       })
-      .then(() => this.props.unselectPiece())
+      .then(() => this.handleUpdateCoordsResults())
       .catch((err) => console.log(err.response.data));
     } else {
       this.props.unselectPiece();
     }
+  }
+
+  handleUpdateCoordsResults() {
+    this.invertTurnStatus();
+    this.props.unselectPiece();
+  }
+
+  invertTurnStatus() {
+    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
+      attackers_turn: !this.props.attackersTurn
+    })
+    .catch((err) => console.log(err.response.data));
   }
 
   handlePieceMovement() {
