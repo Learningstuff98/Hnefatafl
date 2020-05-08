@@ -60,8 +60,8 @@ class Game extends React.Component {
   }
 
   setRoot() {
-    return 'http://localhost:3000';
-    //return 'https://viking-chess-andy-strube.herokuapp.com';
+    //return 'http://localhost:3000';
+    return 'https://viking-chess-andy-strube.herokuapp.com';
   }
 
   getPieces() {
