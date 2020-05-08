@@ -51,9 +51,9 @@ class Game < ApplicationRecord
     self.pieces.create(piece_type: "king", x_coord: 6, y_coord: 6)
   end
 
-  def broadcast_update_signal
+  def broadcast_update_signal(signal)
     ActionCable.server.broadcast 'games',
-      update_is_needed: "for_game_info",
+      update_is_needed: signal,
       game_id: self.id
   end
 

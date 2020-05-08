@@ -27,6 +27,7 @@ class Game extends React.Component {
       received(data) {
         if(data.game_id === gameComponent.props.game_id) {
           if(data.update_is_needed === 'for_pieces') {
+            console.log("The piece was updated");
             gameComponent.getPieces();
           }
           if(data.update_is_needed === 'for_turn') {
@@ -59,8 +60,8 @@ class Game extends React.Component {
   }
 
   setRoot() {
-    //return 'http://localhost:3000';
-    return 'https://viking-chess-andy-strube.herokuapp.com';
+    return 'http://localhost:3000';
+    //return 'https://viking-chess-andy-strube.herokuapp.com';
   }
 
   getPieces() {

@@ -27,7 +27,7 @@ class GamesController < ApplicationController
   def update
     game = Game.find(params[:id])
     game.update_attributes(game_params)
-    game.broadcast_update_signal
+    game.broadcast_update_signal("for_game_info")
     head :ok
   end
 
