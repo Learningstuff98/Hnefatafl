@@ -152,6 +152,9 @@ class Game extends React.Component {
     return <div>
       <CurrentTurn
         attackersTurn={attackersTurn}
+        attacker={this.state.attacker}
+        defender={this.state.defender}
+        kingsHealth={this.state.kingsHealth}
       />
     </div>
   }

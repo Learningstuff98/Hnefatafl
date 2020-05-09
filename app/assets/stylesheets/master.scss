@@ -120,3 +120,16 @@ body {
 .cursor:hover {
   cursor: pointer;
 }
+
+.current-turn {
+  background-color: rgb(0, 136, 106);
+  border: 3px solid rgb(0, 194, 152);
+}
+
+.not-current-turn {
+  color: rgb(0, 78, 14);
+}
+
+.defenders-turn-element {
+  margin-left: 300px;
+}
