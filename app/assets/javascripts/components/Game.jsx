@@ -111,7 +111,6 @@ class Game extends React.Component {
         game_id={this.props.game_id}
         getPieces={this.getPieces}
         kingsHealth={this.state.kingsHealth}
-        getGameInfo={this.getGameInfo}
         attackersTurn={this.state.attackersTurn}
       />
     </div>
