@@ -6,7 +6,7 @@
           <h3><%= f.submit 'Host match', class: 'btn btn-primary make-it-green' %></h3>
         <% end %>
         <br/>
-        <h3><%= link_to "Find match", "#", class: "btn btn-primary make-it-green" %></h3>
+        <h3><%= link_to "Find match", games_path, class: "btn btn-primary make-it-green" %></h3>
         <br/>
         <h3><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "btn btn-primary make-it-green" %></h3>
         <% else %>

@@ -2,6 +2,15 @@ class GamesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:update]
   before_action :authenticate_user!
 
+  def index
+    Game.all.each do |game|
+      if game.attacker == "" || game.defender == ""
+        redirect_to game_path(game)
+        return
+      end
+    end
+  end
+
   def create
     @game = current_user.games.create()
     @game.create_pieces()
