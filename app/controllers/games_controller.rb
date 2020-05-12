@@ -26,9 +26,13 @@ class GamesController < ApplicationController
 
   def update
     game = Game.find(params[:id])
+    starting_turn_status = game.attackers_turn
     game.update_attributes(game_params)
-    game.broadcast_update_signal("for_game_info")
-    game.broadcast_update_signal("for_turn")
+    if starting_turn_status != game.attackers_turn
+      game.broadcast_update_signal("for_turn")
+    else
+      game.broadcast_update_signal("for_game_info")
+    end
     head :ok
   end
 

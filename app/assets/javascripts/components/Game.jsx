@@ -50,7 +50,7 @@ class Game extends React.Component {
 
   getGameInfo() {
     axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit')
-    .then((res) => this.setState({ 
+    .then((res) => this.setState({
       kingsHealth: res.data.kingshealth,
       attacker: res.data.attacker,
       defender: res.data.defender
