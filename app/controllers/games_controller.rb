@@ -14,6 +14,7 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create()
     @game.create_pieces()
+    @game.broadcast_update_signal("for_lobby")
     redirect_to game_path(@game)
   end
 
