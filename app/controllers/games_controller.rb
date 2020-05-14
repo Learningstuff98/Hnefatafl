@@ -3,12 +3,16 @@ class GamesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @open_games = Game.all.collect { |game|
-      if game.attacker == "" || game.defender == ""
-        game
+    @vacant_games = []
+    vacant_games_count = 0
+    Game.all.each do |game|
+      return if vacant_games_count == 5
+      if game.defender == "" || game.attacker == ""
+        @vacant_games.push(game)
+        vacant_games_count = vacant_games_count + 1
       end
-    }
-    @open_games.compact!
+    end
+    @vacant_games
   end
 
   def create
