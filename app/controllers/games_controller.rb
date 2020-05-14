@@ -3,18 +3,17 @@ class GamesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    Game.all.each do |game|
+    @open_games = Game.all.collect { |game|
       if game.attacker == "" || game.defender == ""
-        redirect_to game_path(game)
-        return
+        game
       end
-    end
+    }
+    @open_games.compact!
   end
 
   def create
     @game = current_user.games.create()
     @game.create_pieces()
-    @game.broadcast_update_signal("for_lobby")
     redirect_to game_path(@game)
   end
 
