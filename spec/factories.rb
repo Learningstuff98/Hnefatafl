@@ -11,4 +11,15 @@ FactoryBot.define do
     password_confirmation { "secretPassword" }
   end
 
-end 
+  factory :game do
+    attackers_turn { true }
+    association :user
+  end
+
+  factory :piece do
+    y_coord { 0 }
+    x_coord { 0 }
+    association :game
+  end
+
+end
