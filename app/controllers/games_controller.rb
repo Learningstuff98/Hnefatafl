@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:update]
   before_action :authenticate_user!
 
-  def index
+  def index #needs test, next week
     @vacant_games = []
     vacant_games_count = 0
     Game.all.each do |game|
@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  def destroy
+  def destroy #needs test, next week
     game = Game.find_by_id(params[:id])
     if game
       game.pieces.destroy_all
