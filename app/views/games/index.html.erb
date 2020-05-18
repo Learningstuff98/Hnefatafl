@@ -8,7 +8,7 @@
 
   <% @vacant_games.each do |game| %>
     <br/>
-    <%= link_to "Hosted by #{game.user.username} #{game.id}", game_path(game), class: "make-it-green" %>
+    <%= link_to "Hosted by #{game.user.username}", game_path(game), class: "make-it-green" %>
     <br/>
   <% end %>
 </h2>
