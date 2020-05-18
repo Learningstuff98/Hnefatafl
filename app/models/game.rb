@@ -57,4 +57,15 @@ class Game < ApplicationRecord
       game_id: self.id
   end
 
+  def get_vacant_games
+    vacant_games = []
+    Game.all.each do |game|
+      return vacant_games if vacant_games.count == 5
+      if game.defender == "" || game.attacker == ""
+        vacant_games.push(game)
+      end
+    end
+    vacant_games
+  end
+
 end

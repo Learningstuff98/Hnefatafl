@@ -2,17 +2,11 @@ class GamesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:update]
   before_action :authenticate_user!
 
-  def index #needs test, next week
+  def index
     @vacant_games = []
-    vacant_games_count = 0
-    Game.all.each do |game|
-      return if vacant_games_count == 5
-      if game.defender == "" || game.attacker == ""
-        @vacant_games.push(game)
-        vacant_games_count = vacant_games_count + 1
-      end
+    if Game.all.count > 0
+      @vacant_games = Game.first.get_vacant_games
     end
-    @vacant_games
   end
 
   def create
@@ -25,7 +19,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  def destroy #needs test, next week
+  def destroy #needs tests
     game = Game.find_by_id(params[:id])
     if game
       game.pieces.destroy_all
