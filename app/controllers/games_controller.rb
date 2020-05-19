@@ -19,7 +19,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  def destroy #needs tests
+  def destroy
     game = Game.find_by_id(params[:id])
     if game
       game.pieces.destroy_all
