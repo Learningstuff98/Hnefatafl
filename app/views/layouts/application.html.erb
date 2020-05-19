@@ -31,15 +31,26 @@
             </span>
           </ul>
         </div>
+        <span class="links">
+          <div class="text-center">
+            <span class="link">
+              <a class="fa fa-linkedin-square fa-3x make-it-green" href="https://www.linkedin.com/in/andy-strube-6231ba152/"></a>
+            </span>
+            <span class="link">
+              <a class="fa fa-github-square fa-3x make-it-green" href="https://github.com/Learningstuff98/Hnefatafl"></a>
+            </span>
+            <span class="link">
+              <a class="fa fa-file-text fa-3x make-it-green" href="https://docs.google.com/document/d/1qm4nBdIZfsx8zh4IwYvkVuQYclpOXUCVxnC9vV3_eBM/edit"></a>
+            </span>
+          </div>
+        </span>
       </nav>
+      <br/><br/><br/><br/><br/>
+      <div class="flash-notice make-it-green">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+      <%= yield %>
     </div>
-
-    <br/><br/><br/><br/><br/>
-    <div class="flash-notice make-it-green">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
-
-    <%= yield %>
   </body>
 </html>
