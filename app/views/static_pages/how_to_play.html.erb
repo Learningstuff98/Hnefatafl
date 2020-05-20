@@ -10,8 +10,37 @@
   <h1>Piece Movement</h1>
   <p class="explanation-text">
     When thinking of moving pieces, think of rooks from standard chess. Pieces can only move horizontally or vertically,
-    however the distance is unrestricted.
+    however the distance is unrestricted. No pieces can jump over other pieces.
   </p>
+  <br/><br/>
+  <h1>Turns</h1>
+  <p class="explanation-text">
+    This is a turn based game, so it needs to be your turn to move any of your pieces. Also, be aware that the attacking
+    team moves first.
+  </p>
+  <br/><br/>
+  <h1>Piece Capturing</h1>
+  <p class="explanation-text">
+    Capturing pieces is simple. Just move one of your pieces onto the tile that an enemy piece is on to capture it.
+  </p>
+  <br/><br/>
+  <h1>Winning as the Attacking Team</h1>
+  <p class="explanation-text">
+    For the attacking team to win, the king needs to be captured. This is done by attacking the king twice. In the first
+    attack, the attacking piece will be sacrificed. This will wound the king and turn his gold ring to dark blue, shown
+    below.
+  </p>
+  <%= image_tag 'woundedking.png', class: 'picture img-fluid' %>
+  <br/><br/>
+  <p class="explanation-text">
+    The king will not be able to withstand another attack, and will be captured if he's attacked again in this state.
+  </p>
+  <br/><br/>
+  <h1>Winning as the Defending Team</h1>
+  <p class="explanation-text">
+    To win as the defending team, the king must move to one of the red corner tiles without being captured, shown below.
+  </p>
+  <%= image_tag 'escapedking.png', class: 'picture img-fluid' %>
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 </div>
  
