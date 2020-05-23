@@ -41,7 +41,7 @@ class Game extends React.Component {
   }
 
   getTurnStatus() {
-    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit/')
+    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit')
     .then((res) => this.setState({ 
       attackersTurn: res.data.attackers_turn
     }))
@@ -49,7 +49,7 @@ class Game extends React.Component {
   }
 
   getGameInfo() {
-    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit/')
+    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/edit')
     .then((res) => this.setState({
       kingsHealth: res.data.kingshealth,
       attacker: res.data.attacker,
@@ -64,7 +64,7 @@ class Game extends React.Component {
   }
 
   getPieces() {
-    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/pieces/')
+    axios.get(this.setRoot() + '/games/' + this.props.game_id + '/pieces')
     .then((res) => this.setState({ pieces: res.data }))
     .catch((err) => console.log(err.response.data));
   }
