@@ -17,9 +17,18 @@
 
 <br/><br/><br/>
 
+<% root_url = '' %>
+<% slashes = 0 %>
+<%= "#{polymorphic_url(@game)}".split(//).each do |char| %>
+  <% slashes = slashes + 1 if char == "/" %>
+  <% break if slashes == 3 %>
+  <% root_url = root_url + char %>
+<% end %>
+
 <div class="container box">
   <%= react_component("Game", {
     game_id: @game.id,
-    current_user: current_user
+    current_user: current_user,
+    root_url: root_url
   }) %>
 </div>

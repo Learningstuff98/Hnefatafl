@@ -5,14 +5,14 @@ class TeamForm extends React.Component {
   }
 
   setUserAsAttacker() {
-    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
+    axios.patch(this.props.root_url + '/games/' + this.props.game_id, {
       attacker: this.props.current_user.username
     })
     .catch((err) => console.log(err.response.data));
   }
 
   setUserAsDefender() {
-    axios.patch(this.props.setRoot() + '/games/' + this.props.game_id, {
+    axios.patch(this.props.root_url + '/games/' + this.props.game_id, {
       defender: this.props.current_user.username
     })
     .catch((err) => console.log(err.response.data));

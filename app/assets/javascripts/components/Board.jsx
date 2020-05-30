@@ -39,7 +39,7 @@ class Board extends React.Component {
           selectPiece={this.props.selectPiece}
           unselectPiece={this.props.unselectPiece}
           selectedPiece={this.props.selectedPiece}
-          setRoot={this.props.setRoot}
+          root_url={this.props.root_url}
           game_id={this.props.game_id}
           getPieces={this.props.getPieces}
           pieces={this.props.pieces}
