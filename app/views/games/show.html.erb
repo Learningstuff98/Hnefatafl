@@ -19,7 +19,7 @@
 
 <% root_url = '' %>
 <% slashes = 0 %>
-<%= "#{polymorphic_url(@game)}".split(//).each do |char| %>
+<%= polymorphic_url(@game).split(//).each do |char| %>
   <% slashes = slashes + 1 if char == "/" %>
   <% break if slashes == 3 %>
   <% root_url = root_url + char %>
