@@ -113,7 +113,7 @@ class Tile extends React.Component {
   }
 
   deletePiece(pieceId) {
-    axios.delete(this.props.root_url + '/games/' + this.props.game_id + '/pieces/' + pieceId)
+    axios.delete(this.props.root_with_game_instance + '/pieces/' + pieceId)
     .catch((err) => console.log(err.response.data));
   }
 
@@ -157,7 +157,7 @@ class Tile extends React.Component {
   }
 
   setTurnToDefenders() {
-    axios.patch(this.props.root_url + '/games/' + this.props.game_id, {
+    axios.patch(this.props.root_with_game_instance, {
       attackers_turn: false
     })
     .catch((err) => console.log(err.response.data));
@@ -173,7 +173,7 @@ class Tile extends React.Component {
   }
 
   updateKingsHealth() {
-    axios.patch(this.props.root_url + '/games/' + this.props.game_id, {
+    axios.patch(this.props.root_with_game_instance, {
       kingshealth: this.setKingsHealthStatus()
     })
     .catch((err) => console.log(err.response.data));
@@ -191,7 +191,7 @@ class Tile extends React.Component {
   }
 
   setDefenderAsWinner() {
-    axios.patch(this.props.root_url + '/games/' + this.props.game_id, {
+    axios.patch(this.props.root_with_game_instance, {
       kingshealth: "escaped"
     })
     .catch((err) => console.log(err.response.data));
@@ -199,7 +199,7 @@ class Tile extends React.Component {
 
   updateCoords(selectedPiece, x, y) {
     if(this.isValidMove() && this.isValidPieceTypeForEscapeTile()) {
-      axios.patch(this.props.root_url + '/games/' + this.props.game_id + '/pieces/' + selectedPiece.id, {
+      axios.patch(this.props.root_with_game_instance + '/pieces/' + selectedPiece.id, {
         x_coord: x,
         y_coord: y
       })

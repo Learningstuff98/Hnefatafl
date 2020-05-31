@@ -16,6 +16,7 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.root_with_game_instance);
     this.getPieces();
     this.getGameInfo();
     this.getTurnStatus();
@@ -41,7 +42,7 @@ class Game extends React.Component {
   }
 
   getTurnStatus() {
-    axios.get(this.props.root_url + '/games/' + this.props.game_id + '/edit')
+    axios.get(this.props.root_with_game_instance + '/edit')
     .then((res) => this.setState({ 
       attackersTurn: res.data.attackers_turn
     }))
@@ -49,7 +50,7 @@ class Game extends React.Component {
   }
 
   getGameInfo() {
-    axios.get(this.props.root_url + '/games/' + this.props.game_id + '/edit')
+    axios.get(this.props.root_with_game_instance + '/edit')
     .then((res) => this.setState({
       kingsHealth: res.data.kingshealth,
       attacker: res.data.attacker,
@@ -59,7 +60,7 @@ class Game extends React.Component {
   }
 
   getPieces() {
-    axios.get(this.props.root_url + '/games/' + this.props.game_id + '/pieces')
+    axios.get(this.props.root_with_game_instance + '/pieces')
     .then((res) => this.setState({ pieces: res.data }))
     .catch((err) => console.log(err.response.data));
   }
@@ -102,7 +103,7 @@ class Game extends React.Component {
         selectPiece={this.selectPiece}
         unselectPiece={this.unselectPiece}
         selectedPiece={this.state.selectedPiece}
-        root_url={this.props.root_url}
+        root_with_game_instance={this.props.root_with_game_instance}
         game_id={this.props.game_id}
         getPieces={this.getPieces}
         kingsHealth={this.state.kingsHealth}
@@ -123,7 +124,7 @@ class Game extends React.Component {
     return <div>
       <TeamForm
         current_user={this.props.current_user}
-        root_url={this.props.root_url}
+        root_with_game_instance={this.props.root_with_game_instance}
         game_id={this.props.game_id}
         closeTeamForm={this.closeTeamForm}
         attacker={attacker}
