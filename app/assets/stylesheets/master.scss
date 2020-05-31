@@ -47,8 +47,8 @@ body {
 .tile {
   border: 1px solid rgb(0, 0, 0);
   float: left;
-  height: 70px;
-  width: 70px;
+  height: 60px;
+  width: 60px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
@@ -75,8 +75,8 @@ body {
 
 .piece {
   border: 2px solid rgb(0, 0, 0);
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border-radius: 20px;
   margin-top: 15px;
   margin-left: 15px;
@@ -107,7 +107,7 @@ body {
 }
 
 .losing-team {
-  margin-left: 300px;
+  margin-left: 200px;
 }
 
 .box-background {
@@ -115,7 +115,7 @@ body {
 }
 
 .defenders-option {
-  margin-left: 450px;
+  margin-left: 340px;
 }
 
 .cursor:hover {
@@ -132,7 +132,7 @@ body {
 }
 
 .defenders-turn-element {
-  margin-left: 300px;
+  margin-left: 190px;
 }
 
 .links {
