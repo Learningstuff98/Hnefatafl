@@ -16,7 +16,6 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.root_with_game_instance);
     this.getPieces();
     this.getGameInfo();
     this.getTurnStatus();
