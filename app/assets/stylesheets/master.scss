@@ -5,12 +5,12 @@
   background-color: rgba(24, 21, 22, 0.9);
 }
 
-.make-it-green {
-  color: #00C122;
+.link:hover {
+  color: rgb(14, 73, 168);
 }
 
-.flash-notice {
-  margin-left: 20px;
+.make-it-green {
+  color: #00C122;
 }
 
 body {
@@ -135,22 +135,6 @@ body {
   margin-left: 190px;
 }
 
-.links {
-  width: 500px;
-  position: fixed;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.link {
-  margin: 15px;
-}
-
-.navbar {
-  min-height: 80px;
-}
-
 .explanation-text {
   font-size: 25px;
 }
@@ -158,12 +142,4 @@ body {
 .picture {
   margin-top: 15px;
   width: 500px;
-}
-
-.navbar-info {
-  margin-top: 25px;
-}
-
-.navbar {
-  min-height: 140px;
 }

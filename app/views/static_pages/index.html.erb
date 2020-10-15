@@ -10,8 +10,6 @@
         <br/>
         <h3><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "btn btn-primary make-it-green" %></h3>
         <% else %>
-        <h3 class="make-it-green">Sign up or log in to start playing</h3>
-        <br/>
         <h3><%= link_to "Log in", new_user_session_path, class: "btn btn-primary make-it-green" %></h3>
         <br/>
         <h3><%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary make-it-green" %></h3>
